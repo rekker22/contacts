@@ -4,13 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="650" Height="450"
         x:Class="Contacts.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Background="#252329"
+        ExtendClientAreaToDecorationsHint="True"
+        CanResize="False"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Contacts.Desktop">
+        Title="Contacts">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+    <Grid ColumnDefinitions="4*,6*"
+          Margin="0 30 0 0">
+        <Grid Grid.Column="0">
+            <ContentControl Content="{Binding ContactsListViewModel}" />
+        </Grid>
+        <Grid Grid.Column="1"></Grid>
+    </Grid>
 
 </Window>

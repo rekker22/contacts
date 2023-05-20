@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Contacts.Desktop.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Contacts.Desktop.Views.ContactsListView"
+             x:DataType="vm:ContactsListViewModel">
+    
+    <Grid RowDefinitions="*,9*"
+          HorizontalAlignment="Center">
+        <TextBox Grid.Row="0"
+                 Width="220"
+                 Height="30"
+                 FontSize="16"
+                 BorderThickness="0 0 0 1"
+                 Text="{Binding SearchText, Mode=TwoWay}"
+                 Background="Transparent"
+                 Watermark="Search contact">
+            <TextBox.Styles>
+                <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+                <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0 0 0 1" />
+                </Style>
+            </TextBox.Styles>
+        </TextBox>
+        <ItemsControl Grid.Row="1"
+                      Margin="12 8 0 0"
+                      Items="{Binding FilteredContactsList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"
+                               Margin="0 5"
+                               FontSize="15" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+    
+</UserControl>
