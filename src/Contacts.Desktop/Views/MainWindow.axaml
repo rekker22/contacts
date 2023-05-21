@@ -15,16 +15,16 @@
 
     <Grid ColumnDefinitions="4*,Auto,6*"
           Margin="0 30 0 0">
-        <Grid Grid.Column="0">
-            <ContentControl Content="{Binding ContactsListViewModel}" />
-        </Grid>
+        <ContentControl Grid.Column="0" 
+                        Content="{Binding ContactsListViewModel}" />
         <Border Grid.Column="1"
                 Width="2"
-                Background="{StaticResource Secondary}"
+                Background="{StaticResource SecondaryDark}"
                 Height="400"
                 CornerRadius="14"
                 BorderThickness="0" />
-        <Grid Grid.Column="2"></Grid>
+        <ContentControl Grid.Column="2"
+                        Content="{Binding ContactDetailsViewModel}"/>
     </Grid>
 
 </Window>
