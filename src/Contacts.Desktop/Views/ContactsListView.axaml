@@ -37,7 +37,7 @@
         </TextBox>
         <ListBox Grid.Row="1"
                  x:Name="Test"
-                 Margin="12 8 0 0"
+                 Margin="10 8 0 0"
                  Background="Transparent"
                  SelectionMode="Single"
                  SelectedItem="{Binding  SelectedContact}"
@@ -54,6 +54,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"
+                               Margin="5 0 0 0"
                                FontSize="15" />
                 </DataTemplate>
             </ListBox.ItemTemplate>

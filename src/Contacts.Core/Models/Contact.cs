@@ -1,6 +1,4 @@
-using System;
-
-namespace Contacts.Desktop.Models;
+namespace Contacts.Core.Models;
 
 public record Contact(
     Guid Id,

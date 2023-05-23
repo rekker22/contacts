@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using Contacts.Core.Interfaces;
+using Contacts.Core.Models;
 using Contacts.Desktop.Messages;
-using Contacts.Desktop.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Contacts.Desktop.ViewModels;
 
@@ -12,15 +14,9 @@ public partial class ContactsListViewModel : ViewModelBase
 {
     public ContactsListViewModel()
     {
-        _contacts = new List<Contact>
-        {
-            new Contact(Guid.NewGuid(), "Demir Gala", "1234567890", "example1@example.com"),
-            new Contact(Guid.NewGuid(), "Loretta Hoder", "1234567891", "example2@example.com"),
-            new Contact(Guid.NewGuid(), "Norbu Anan", "1234567892", "example3@example.com"),
-            new Contact(Guid.NewGuid(), "James Smith", "1234567892", "example3@example.com"),
-            new Contact(Guid.NewGuid(), "Alex Anan", "1234567892", "example3@example.com"),
-        };
+        var contactService = App.Current.Services.GetService<IContactsService>();
         _searchText = "";
+        _contacts = contactService!.GetContacts().ToList();
         FilteredContactsList = _contacts;
     }
 
@@ -37,7 +33,7 @@ public partial class ContactsListViewModel : ViewModelBase
         {
             if (SetProperty(ref _selectedContact, value) && _selectedContact is not null)
             {
-                WeakReferenceMessenger.Default.Send(new SelectedContactChangeMessage(_selectedContact));
+                WeakReferenceMessenger.Default.Send(new ContactSelectionMessage(_selectedContact));
             }
         }
     }
