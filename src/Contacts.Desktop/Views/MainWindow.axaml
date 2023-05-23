@@ -12,6 +12,10 @@
         CanResize="False"
         Icon="/Assets/avalonia-logo.ico"
         Title="Contacts">
+    
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
 
     <Grid ColumnDefinitions="4*,Auto,6*"
           Margin="0 30 0 0">

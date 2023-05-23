@@ -3,9 +3,13 @@
              xmlns:vm="using:Contacts.Desktop.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="325" d:DesignHeight="450"
              x:DataType="vm:ContactsListViewModel"
              x:Class="Contacts.Desktop.Views.ContactsListView">
+    
+    <Design.DataContext>
+        <vm:ContactsListViewModel/>
+    </Design.DataContext>
 
     <Grid RowDefinitions="*,9*"
           HorizontalAlignment="Center">
@@ -39,8 +43,12 @@
                  SelectedItem="{Binding  SelectedContact}"
                  Items="{Binding FilteredContactsList}">
             <ListBox.Styles>
+                <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
                 <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="Background" Value="{StaticResource SecondaryDark}" />
+                    <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </ListBox.Styles>
             <ListBox.ItemTemplate>
