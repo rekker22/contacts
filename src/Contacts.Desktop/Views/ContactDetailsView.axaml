@@ -9,13 +9,13 @@
 
     <Grid RowDefinitions="2*,*,6*"
           Margin="10"
-          IsVisible="{Binding !!$parent[Window].DataContext.SelectedContact}">
+          IsVisible="{Binding !!Contact}">
         <Svg Grid.Row="0"
              Path="/Assets/account_circle.svg"
              HorizontalAlignment="Center"
              Height="80" Width="80" />
         <TextBlock Grid.Row="1"
-                   Text="{Binding $parent[Window].DataContext.SelectedContact.Name, FallbackValue=''}"
+                   Text="{Binding Contact.Name, FallbackValue=''}"
                    HorizontalAlignment="Center"
                    Foreground="White"
                    FontSize="20"
@@ -26,11 +26,11 @@
                     Margin="0 20 0 0">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Number : " FontWeight="SemiBold" />
-                <TextBlock Text="{Binding $parent[Window].DataContext.SelectedContact.Number, FallbackValue=''}" />
+                <TextBlock Text="{Binding Contact.Number, FallbackValue=''}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Email : " FontWeight="SemiBold" />
-                <TextBlock Text="{Binding $parent[Window].DataContext.SelectedContact.Email, FallbackValue=''}" />
+                <TextBlock Text="{Binding Contact.Email, FallbackValue=''}" />
             </StackPanel>
         </StackPanel>
     </Grid>

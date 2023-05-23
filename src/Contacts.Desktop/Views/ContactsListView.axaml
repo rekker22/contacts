@@ -36,7 +36,7 @@
                  Margin="12 8 0 0"
                  Background="Transparent"
                  SelectionMode="Single"
-                 SelectedItem="{Binding  $parent[Window].DataContext.SelectedContact}"
+                 SelectedItem="{Binding  SelectedContact}"
                  Items="{Binding FilteredContactsList}">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
