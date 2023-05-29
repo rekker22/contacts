@@ -33,7 +33,13 @@ public partial class ContactsListViewModel : ViewModelBase,
     public Contact? SelectedContact
     {
         get => _selectedContact;
-        set => SetProperty(ref _selectedContact, value, true);
+        set
+        {
+            if (SetProperty(ref _selectedContact, value))
+            {
+                Messenger.Send(new ContactSelectionMessage(_selectedContact));
+            }
+        }
     }
 
     private string _searchText;

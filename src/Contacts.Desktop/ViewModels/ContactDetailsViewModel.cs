@@ -1,12 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Messaging.Messages;
 using Contacts.Core.Models;
+using Contacts.Desktop.Messages;
 
 namespace Contacts.Desktop.ViewModels;
 
 public partial class ContactDetailsViewModel : ViewModelBase,
-    IRecipient<PropertyChangedMessage<Contact>>
+    IRecipient<ContactSelectionMessage>
 {
     public ContactDetailsViewModel()
     {
@@ -16,5 +16,5 @@ public partial class ContactDetailsViewModel : ViewModelBase,
     [ObservableProperty]
     private Contact? _contact;
 
-    public void Receive(PropertyChangedMessage<Contact> message) => Contact = message.NewValue;
+    public void Receive(ContactSelectionMessage message) => Contact = message.Value;
 }
