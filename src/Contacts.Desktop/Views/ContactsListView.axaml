@@ -17,27 +17,14 @@
             <Svg Path="/Assets/search.svg"
                  HorizontalAlignment="Left"
                  Height="20" Width="20" />
-            <TextBox Width="190"
-                     Height="30"
+            <TextBox Width="190" Height="30"
+                     Classes="input"
                      FontSize="16"
-                     CornerRadius="0"
-                     BorderBrush="{StaticResource SecondaryDark}"
-                     BorderThickness="0 0 0 1"
                      Text="{Binding  SearchText}"
-                     Background="Transparent"
                      Watermark="Search contact">
                 <TextBox.Styles>
-                    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="BorderBrush" Value="{StaticResource SecondaryLight}" />
-                    </Style>
-                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="BorderBrush" Value="{StaticResource SecondaryLight}" />
-                        <Setter Property="BorderThickness" Value="0 0 0 1" />
-                    </Style>
                     <Style Selector="TextBox /template/ TextPresenter#PART_TextPresenter, TextBox /template/ TextBlock#PART_Watermark">
-                        <Setter Property="Margin" Value="14 0 0 0" />
+                        <Setter Property="Margin" Value="15 0 0 0" />
                     </Style>
                 </TextBox.Styles>
             </TextBox>
@@ -50,6 +37,11 @@
                  SelectedItem="{Binding  SelectedContact}"
                  Items="{Binding FilteredContactsList}">
             <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="0 " />
+                    <Setter Property="Height" Value="28" />
+                    <Setter Property="Margin" Value="0 0 0 2" />
+                </Style>
                 <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
@@ -61,8 +53,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"
-                               Margin="5 0 0 0"
-                               FontSize="15" />
+                               VerticalAlignment="Center"
+                               Margin="8 0 0 0"
+                               FontSize="14" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

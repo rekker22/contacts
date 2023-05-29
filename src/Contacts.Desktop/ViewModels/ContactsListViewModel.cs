@@ -10,17 +10,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contacts.Desktop.ViewModels;
 
-public partial class ContactsListViewModel : ViewModelBase
+public partial class ContactsListViewModel : ViewModelBase,
+    IRecipient<ContactAddedMessage>
 {
+    private readonly IContactsService _contactService;
+    
     public ContactsListViewModel()
     {
-        var contactService = App.Current.Services.GetService<IContactsService>();
+        _contactService = App.Current.Services.GetService<IContactsService>()!;
         _searchText = "";
-        _contacts = contactService!.GetContacts().ToList();
+        _contacts = _contactService.GetContacts().OrderBy(x => x.Name).ToList();
         FilteredContactsList = _contacts;
+        IsActive = true;
     }
 
-    private readonly List<Contact> _contacts;
+    private List<Contact> _contacts;
 
     [ObservableProperty] 
     private List<Contact> _filteredContactsList;
@@ -29,13 +33,7 @@ public partial class ContactsListViewModel : ViewModelBase
     public Contact? SelectedContact
     {
         get => _selectedContact;
-        set
-        {
-            if (SetProperty(ref _selectedContact, value) && _selectedContact is not null)
-            {
-                WeakReferenceMessenger.Default.Send(new ContactSelectionMessage(_selectedContact));
-            }
-        }
+        set => SetProperty(ref _selectedContact, value, true);
     }
 
     private string _searchText;
@@ -46,10 +44,21 @@ public partial class ContactsListViewModel : ViewModelBase
         {
             if (SetProperty(ref _searchText, value))
             {
-                FilteredContactsList = _contacts
-                    .Where(x => x.Name.Contains(_searchText.Trim(), StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                UpdateContactList();
             }
         }
+    }
+    
+    private void UpdateContactList()
+    {
+        FilteredContactsList = _contacts
+            .Where(x => x.Name.Contains(_searchText.Trim(), StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+    public void Receive(ContactAddedMessage message)
+    {
+        _contacts = _contactService.GetContacts().OrderBy(x => x.Name).ToList();
+        UpdateContactList();
     }
 }

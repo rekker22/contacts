@@ -13,14 +13,36 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Contacts">
     
+    <Window.Styles>
+        <StyleInclude Source="/Styles/TextBoxStyle.axaml" />
+    </Window.Styles>
+
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
     <Grid ColumnDefinitions="4*,Auto,6*"
           Margin="0 30 0 0">
-        <ContentControl Grid.Column="0" 
-                        Content="{Binding ContactsListViewModel}" />
+        <Grid Grid.Column="0"
+              RowDefinitions="*,Auto">
+            <ContentControl Grid.Row="0"
+                            Content="{Binding LeftContentViewModelBase}" />
+            <Button Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Background="{StaticResource Primary}"
+                    Padding="10 3"
+                    Command="{Binding AddNewContactCommand}"
+                    Margin="0 5 20 14">
+                <StackPanel Orientation="Horizontal">
+                    <Svg Path="/Assets/person_add.svg"
+                         Height="20" Width="20" />
+                    <TextBlock Text="Add new contact"
+                               FontSize="14"
+                               Foreground="{StaticResource Link}"
+                               Margin="6 2 0 0" />
+                </StackPanel>
+            </Button>
+        </Grid>
         <Border Grid.Column="1"
                 Width="2"
                 Background="{StaticResource SecondaryDark}"
@@ -28,7 +50,7 @@
                 CornerRadius="14"
                 BorderThickness="0" />
         <ContentControl Grid.Column="2"
-                        Content="{Binding ContactDetailsViewModel}"/>
+                        Content="{Binding RightContentViewModel}" />
     </Grid>
 
 </Window>

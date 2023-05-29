@@ -1,13 +1,28 @@
-﻿namespace Contacts.Desktop.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Contacts.Desktop.Messages;
 
-public class MainWindowViewModel : ViewModelBase
+namespace Contacts.Desktop.ViewModels;
+
+public partial class MainWindowViewModel : ViewModelBase,
+    IRecipient<ContactAddedMessage>
 {
-    public ViewModelBase ContactsListViewModel { get; init; }
-    public ViewModelBase ContactDetailsViewModel { get; init; }
+    [ObservableProperty] 
+    private ViewModelBase _leftContentViewModelBase;
+
+    [ObservableProperty] 
+    private ViewModelBase _rightContentViewModel;
 
     public MainWindowViewModel()
     {
-        ContactsListViewModel = new ContactsListViewModel();
-        ContactDetailsViewModel = new ContactDetailsViewModel();
+        LeftContentViewModelBase = new ContactsListViewModel();
+        RightContentViewModel = new ContactDetailsViewModel();
+        IsActive = true;
     }
+
+    [RelayCommand]
+    private void AddNewContact() => RightContentViewModel = new AddContactViewModel();
+
+    public void Receive(ContactAddedMessage message) => RightContentViewModel = new ContactDetailsViewModel();
 }

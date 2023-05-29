@@ -4,5 +4,6 @@
     <SolidColorBrush x:Key="Primary" Color="#252329" />
     <SolidColorBrush x:Key="SecondaryDark" Color="#504e53" />
     <SolidColorBrush x:Key="SecondaryLight" Color="#666569" />
+    <SolidColorBrush x:Key="Link" Color="#628fea" />
     
 </ResourceDictionary>
