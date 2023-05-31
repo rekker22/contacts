@@ -30,7 +30,7 @@
             <Button Grid.Row="1"
                     HorizontalAlignment="Center"
                     Background="{StaticResource Primary}"
-                    Padding="10 3"
+                    Padding="10 4"
                     Command="{Binding AddNewContactCommand}"
                     Margin="0 5 20 14">
                 <StackPanel Orientation="Horizontal">
